@@ -61,22 +61,26 @@
             // uxOpen
             // 
             this.uxOpen.Name = "uxOpen";
-            this.uxOpen.Size = new System.Drawing.Size(252, 30);
+            this.uxOpen.Size = new System.Drawing.Size(185, 30);
             this.uxOpen.Text = "Open . . .";
             this.uxOpen.Click += new System.EventHandler(this.uxOpen_Click);
             // 
             // uxSaveAs
             // 
             this.uxSaveAs.Name = "uxSaveAs";
-            this.uxSaveAs.Size = new System.Drawing.Size(252, 30);
+            this.uxSaveAs.Size = new System.Drawing.Size(185, 30);
             this.uxSaveAs.Text = "Save As . . .";
             this.uxSaveAs.Click += new System.EventHandler(this.uxSaveAs_Click);
             // 
             // uxEditBuffer
             // 
+            this.uxEditBuffer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.uxEditBuffer.Location = new System.Drawing.Point(12, 36);
             this.uxEditBuffer.Multiline = true;
             this.uxEditBuffer.Name = "uxEditBuffer";
+            this.uxEditBuffer.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.uxEditBuffer.Size = new System.Drawing.Size(559, 474);
             this.uxEditBuffer.TabIndex = 1;
             // 
