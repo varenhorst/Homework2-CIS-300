@@ -19,6 +19,9 @@ namespace Ksu.Cis300.TextEditor
     /// </summary>
     public partial class UserInterface : Form
     {
+
+        private KillRing _killring = new KillRing();
+        private SetCapacityDialog _setCapacity = new SetCapacityDialog();
         /// <summary>
         /// The history of edits that can be undone.
         /// </summary>
@@ -115,7 +118,7 @@ namespace Ksu.Cis300.TextEditor
         /// Encrypts the given character.
         /// </summary>
         /// <param name="c">The character to encrypt.</param>
-        /// <returns>The encrypted character.</returns>
+        /// <returns>The encrypted character.</returns> 
         private char Encrypt(char c)
         {
             if (c >= 'a' && c <= 'z')
@@ -316,6 +319,76 @@ namespace Ksu.Cis300.TextEditor
             DoEdit(uxEditBuffer, isDel, loc, editStr);
             uxUndo.Enabled = true;
             uxRedo.Enabled = _undoHistory.Count > 0;
+        }
+
+        //Event Handler for Kill
+        //Copies the selection, and replaces the selection with nothing
+        private void uxKill_Click(object sender, EventArgs e)
+        {
+            CopySelection();
+            ReplaceSelection("");
+        }
+
+        //Event Handler for Copy As Kill
+        //Copies the selection and its it to the killring
+        private void uxCopyAsKill_Click(object sender, EventArgs e)
+        {
+            CopySelection();
+        }
+        
+        //Event Handlder for Yank
+        //Replaces the selection with killring.yank
+        private void uxYank_Click(object sender, EventArgs e)
+        {
+            ReplaceSelection(_killring.Yank());
+        }
+
+        //Event Handler for Yank Previous
+        //Replaces the selection with killring.yankPrevious
+        private void uxYankPrevious_Click(object sender, EventArgs e)
+        {
+            ReplaceSelection(_killring.YankPrevious());
+        }
+
+        //Event Handler for the Kill Ring Capacity Dialog
+        //Sets _killring.capacity
+        private void uxKillRingCapacity_Click(object sender, EventArgs e)
+        {
+            int capacity = _killring.Capacity;
+
+            if (_setCapacity.ShowDialog() == DialogResult.OK)
+            {
+                uxYankPrevious.Enabled = false;
+                _killring.Capacity = _setCapacity.Capacity;
+            }
+            else
+            {
+                _killring.Capacity = capacity;
+            }
+        }
+
+        // if selection is non-empty
+        //add contents to killring
+        //Enable Yank
+        private void CopySelection()
+        {
+            if (uxEditBuffer.SelectedText.Length > 0) 
+            {
+                string textSelected = uxEditBuffer.SelectedText;
+                _killring.Add(textSelected);
+                uxYank.Enabled = true;
+            }
+        }
+
+        //Replace the selection with the given string
+        //Enable Yank Previous
+        private void ReplaceSelection(string text)
+        {
+            uxEditBuffer.SelectedText = text;
+            int start = uxEditBuffer.SelectionStart;
+            int length = uxEditBuffer.SelectionLength;
+            uxEditBuffer.Select(start, length);
+            uxYankPrevious.Enabled = true;
         }
     }
 }

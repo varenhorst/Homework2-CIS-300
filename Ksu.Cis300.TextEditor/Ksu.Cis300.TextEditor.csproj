@@ -45,6 +45,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SetCapacityDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetCapacityDialog.Designer.cs">
+      <DependentUpon>SetCapacityDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DoublyLinkedListCell.cs" />
+    <Compile Include="KillRing.cs" />
     <Compile Include="UserInterface.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,6 +61,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="SetCapacityDialog.resx">
+      <DependentUpon>SetCapacityDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
